@@ -3,7 +3,6 @@ package com.example.jokeui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class JokeActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class JokeActivity extends AppCompatActivity {
         TextView jokeTV = findViewById(R.id.jokeTextView);
 
         Intent intent = getIntent();
-        if (intent !=null && intent.hasExtra(INTENT_EXTRA)){
+        if (intent != null && intent.hasExtra(INTENT_EXTRA)){
 
             jokeTV.setText(intent.getStringExtra(INTENT_EXTRA));
 

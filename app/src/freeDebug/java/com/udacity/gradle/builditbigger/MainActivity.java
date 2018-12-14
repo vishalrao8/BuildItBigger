@@ -1,10 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +11,7 @@ import android.widget.Toast;
 
 import com.example.jokeui.JokeActivity;
 import com.google.android.gms.ads.MobileAds;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
-import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            String joke = new EndpointsAsyncTask().execute(new String[]{"hi"}).get();
+            String joke = new EndpointsAsyncTask().execute(new String[]{"getJoke"}).get();
             Intent intent = new Intent(this, JokeActivity.class);
             intent.putExtra(INTENT_EXTRA, joke);
             startActivity(intent);
@@ -73,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, getString(R.string.error_toast), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @VisibleForTesting
+    public static boolean testAsyncTask () {
+
+        String res = null;
+        try {
+            res = new EndpointsAsyncTask().execute(new String[]{"getJoke"}).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return res != null && !res.equals("");
     }
 }
 

@@ -31,7 +31,7 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <meta-data
+        <meta-data tools:node="remove"
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/ADMOB_ID"/>
     </application>
